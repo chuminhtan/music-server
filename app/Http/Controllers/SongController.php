@@ -56,7 +56,9 @@ class SongController extends Controller
         $data = [
             'song_name' => trim($request->song_name, " "), //cắt khoảng trắng 2 bên của tên
             'GE_ID' => $request->genre_id,
-            'AR_ID' => $request->artist_id
+            'AR_ID1' => $request->artist_id1,
+            'AR_ID2' => $request->artist_id2,
+            'AR_ID3' => $request->artist_id3
         ];
 
         try {
@@ -78,7 +80,9 @@ class SongController extends Controller
                 ->insert([
                     'SO_NAME' => $data['song_name'],
                     'GE_ID' => $data['GE_ID'],
-                    'AR_ID' => $data['AR_ID'],
+                    'AR_ID' => $data['AR_ID1'],
+                    'AR_ID2' => $data['AR_ID2'],
+                    'AR_ID3' => $data['AR_ID3'],
                     'SO_SRC' => $songName,
                     'SO_IMG' => $imageName
                 ]);

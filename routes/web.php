@@ -13,6 +13,7 @@
 
 use App\Http\Controllers\SongController;
 
+
 Route::get('/', 'SongController@viewList');
 
 Route::group(['prefix' => 'song'], function () {
@@ -21,4 +22,9 @@ Route::group(['prefix' => 'song'], function () {
     Route::post('/create', 'SongController@create');
     Route::get('/new', "SongController@GetNew");
     Route::get('/{id}', 'SongController@GetSong');
+});
+
+Route::group(['prefix' => 'playlist'], function () {
+    Route::get('/newest', 'PlaylistController@getNewest');
+    Route::get('/{id}', 'PlaylistController@getPlaylist');
 });
