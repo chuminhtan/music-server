@@ -21,4 +21,6 @@ Route::group(['prefix' => 'song'], function () {
     Route::post('/create', 'SongController@create');
     Route::get('/new', "SongController@GetNew");
     Route::get('/{id}', 'SongController@GetSong');
+    Route::get('/search/{name}', 'SongController@getSongInfoByName');
+    Route::get('/songrelate/{word}', 'SongController@getListSongRelated');
 });

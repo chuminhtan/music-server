@@ -114,4 +114,24 @@ class SongController extends Controller
 
         return $songList;
     }
+
+    // GET
+    // Lấy thông tin danh sách bài hát liên quan 
+    public function getListSongRelated(Request $request, $word) {
+        $host = $request->getHttpHost();
+        $songList = DB::table('SONG')
+                ->where('SO_NAME', 'LIKE', ''.$word.'%')
+                ->get();
+        return $songList;
+    }
+
+    // GET
+    // Lấy thông tin bài hát bằng tên bài hát
+    public function getSongInfoByName(Request $request, $name) {
+        $host = $request->getHttpHost();
+        $listsong = DB::table('SONG')
+                ->where('SO_NAME', '=' , $name);
+        
+        return $listsong;
+    }
 }
