@@ -31,4 +31,107 @@ class PlaylistController extends Controller
             return response()->json(['errors' => $err->getMessage()]);
         }
     }
+
+
+    // Playlist bằng Type
+    // Get
+    public function getPlaylistByType($type)
+    {
+        $playlist = DB::table('playlist')->where('PL_TYPE', '=', $type)->get();
+
+        return $playlist;
+    }
+
+
+    // WEB - get
+    // Hiển thị danh sách
+    public function showListView()
+    {
+        $playlists = DB::table('playlist')->get();
+
+        // dd($playlists);
+        return view('playlist.list', ['playlists' => $playlists]);
+    }
+
+
+    // VIEW
+    // Tạo playlist
+    // GET
+
+    public function createPlaylistView()
+    {
+
+        $songList = DB::table('SONG')
+            ->join('GENRE', 'GENRE.GE_ID', '=', 'SONG.GE_ID')
+            ->get();
+
+        // dd($songList);
+
+        for ($i = 0; $i < sizeof($songList); $i++) {
+
+            $songId = $songList[$i]->SO_ID;
+
+            $artists = DB::table('artist')
+                ->join('artist_song', 'artist_song.AR_ID', '=', 'artist.AR_ID')
+                ->where('artist_song.SO_ID', '=', $songId)
+                ->select(['artist.AR_ID', 'artist.AR_NAME'])
+                ->get();
+            $songList[$i]->ARTISTS =  $artists;
+        }
+
+
+        return view('playlist.create', ['songList' => $songList]);
+    }
+
+    // View - Post
+    // Tạo playlist
+
+    public function createPlaylist(Request $request)
+    {
+        // dd($request);
+
+        // lấy dữ liệu từ request
+        $data = [
+            'PL_NAME' => trim($request->playlist_name, " "), //cắt khoảng trắng 2 bên của tên
+            'PL_TYPE' => $request->playlist_type,
+            'PL_DES' => $request->playlist_des,
+            'songsId' => $request->songId,
+        ];
+
+
+        try {
+
+            // Lưu ảnh vô thư mục song: public/storage/playlist-image/<image_name>
+            if ($request->hasFile('playlist_image')) {
+                $imagePath = Storage::putFile('playlist-image', $request->file('playlist_image'));
+                $imageName = basename(($imagePath)); // trả về tên file
+            }
+
+
+            // Lưu PLAYLIST DB
+            $playlistId = DB::table('playlist')
+                ->insertGetId([
+                    'PL_NAME' => $data['PL_NAME'],
+                    'PL_DES' => $data['PL_DES'],
+                    'PL_TYPE' => $data['PL_TYPE'],
+                    'PL_IMG' => $imageName
+                ]);
+
+
+            // Lưu PlaylistId và SongId vào Collection
+
+            foreach ($data['songsId'] as $songId) {
+                DB::table('collection')
+                    ->insert(['PL_ID' => $playlistId, 'SO_ID' => $songId]);
+            }
+        } catch (Exception $ex) {
+
+            Session::flash('fail', 'Lỗi Server');
+            dd($ex->getMessage());
+            return Redirect::back();
+        }
+
+        Session::flash('success', 'Đã Upload');
+        return Redirect::to('playlist');
+    }
 }

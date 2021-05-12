@@ -9,6 +9,17 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
+	<style>
+		.my-custom-scrollbar {
+			position: relative;
+			height: 1000px;
+			overflow: auto;
+		}
+
+		.table-wrapper-scroll-y {
+			display: block;
+		}
+	</style>
 	<title>3Gs House</title>
 
 	<!-- Custom fonts for this template-->

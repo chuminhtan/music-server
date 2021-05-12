@@ -20,9 +20,14 @@ Route::get('/', 'SongController@viewList');
 // SONG
 
 Route::group(['prefix' => 'song'], function () {
+
+    // view
     Route::get('', 'SongController@viewList');
     Route::get('/create', 'SongController@viewCreate');
     Route::post('/create', 'SongController@create');
+
+
+    //api
     Route::get('/new', "SongController@GetNew");
     Route::get('/{id}', 'SongController@GetSong');
 });
@@ -32,8 +37,16 @@ Route::group(['prefix' => 'song'], function () {
 // PLAYLIST
 
 Route::group(['prefix' => 'playlist'], function () {
+
+    //view
+    Route::get('', 'PlaylistController@showListView');
+    Route::get('/create', 'PlaylistController@createPlaylistView');
+    Route::post('/create', 'PlaylistController@createPlaylist');
+
+
+    // api
     Route::get('/newest', 'PlaylistController@getNewest');
-    Route::get('/{id}', 'PlaylistController@getPlaylist');
+    Route::get('/type/{type}', 'PlaylistController@getPlaylistByType');
 });
 
 
