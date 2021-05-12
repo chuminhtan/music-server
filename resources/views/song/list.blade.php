@@ -51,7 +51,11 @@
                             </td>
                             <td>{{ $song->SO_NAME }}</td>
                             <td class="text-right font-weight-bold text-primary">
-                                {{ $song->AR_NAME }}
+
+                                @foreach($song->ARTISTS as $artist)
+                                {{ $artist->AR_NAME . ","}}
+
+                                @endforeach
                             </td>
                             <td>
                                 {{ $song->GE_NAME }}
@@ -68,15 +72,12 @@
                             </td>
                         </tr>
                         @php
-                        $number++
+                        $number++;
                         @endphp
                         @endforeach
                         @endif
                     </tbody>
                 </table>
-                @if (isset($songList))
-                {{ $songList->links() }}
-                @endif
             </div>
         </div>
     </div>

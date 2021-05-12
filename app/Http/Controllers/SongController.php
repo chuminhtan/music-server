@@ -22,11 +22,23 @@ class SongController extends Controller
     {
         $songList = DB::table('SONG')
             ->join('GENRE', 'GENRE.GE_ID', '=', 'SONG.GE_ID')
-            ->join('ARTIST', 'ARTIST.AR_ID', 'SONG.AR_ID')
-            ->paginate(10);
+            ->get();
 
         // dd($songList);
 
+        for ($i = 0; $i < sizeof($songList); $i++) {
+
+            $songId = $songList[$i]->SO_ID;
+
+            $artists = DB::table('artist')
+                ->join('artist_song', 'artist_song.AR_ID', '=', 'artist.AR_ID')
+                ->where('artist_song.SO_ID', '=', $songId)
+                ->select(['artist.AR_ID', 'artist.AR_NAME'])
+                ->get();
+            $songList[$i]->ARTISTS =  $artists;
+        }
+
+        // dd($songList);
         return view('song.list', ['songList' => $songList]);
     }
 
@@ -75,16 +87,23 @@ class SongController extends Controller
                 $songName = basename($songPath);
             }
 
-            // Lưu db
-            DB::table('song')
-                ->insert([
+            // Lưu song db
+            $songId = DB::table('song')
+                ->insertGetId([
                     'SO_NAME' => $data['song_name'],
                     'GE_ID' => $data['GE_ID'],
-                    'AR_ID' => $data['AR_ID1'],
                     'AR_ID2' => $data['AR_ID2'],
                     'AR_ID3' => $data['AR_ID3'],
                     'SO_SRC' => $songName,
                     'SO_IMG' => $imageName
+                ]);
+
+            // Lưu Artist_Song db
+            DB::table('artist_song')
+                ->insert([
+                    ['SO_ID' => $songId, 'AR_ID' => $data['AR_ID1']],
+                    ['SO_ID' => $songId, 'AR_ID' => $data['AR_ID2']],
+                    ['SO_ID' => $songId, 'AR_ID' => $data['AR_ID3']],
                 ]);
         } catch (Exception $ex) {
             Session::flash('fail', 'Lỗi Server');

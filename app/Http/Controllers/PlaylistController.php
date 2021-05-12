@@ -31,22 +31,4 @@ class PlaylistController extends Controller
             return response()->json(['errors' => $err->getMessage()]);
         }
     }
-
-
-    // Playlist theo ID
-    // Get
-    public function getPlaylist($id)
-    {
-
-        try {
-            $playlist = DB::table('playlist')
-                ->join('collection', 'collection.PL_ID', '=', 'playlist.PL_ID')
-                ->join('song', 'song.SO_ID', '=', 'collection.SO_ID')
-                ->get();
-
-            return $playlist;
-        } catch (Exception $e) {
-            return response()->json(['errors' => $e->getMessage()]);
-        }
-    }
 }
