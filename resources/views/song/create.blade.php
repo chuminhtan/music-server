@@ -31,11 +31,36 @@
                         </div>
                     </div>
 
-                    <!-- Tên Nghệ sĩ -->
+                    <!-- Tên Nghệ sĩ 1-->
                     <div class="form-group row">
-                        <label for="artist" class="col-md-3 col-form-label">Nghệ Sĩ</label>
+                        <label for="artist1" class="col-md-3 col-form-label">Nghệ Sĩ 1</label>
                         <div class="col-sm-8">
-                            <select class="form-control" name="artist_id" id="artist">
+                            <select class="form-control" name="artist_id1" id="artist1">
+                                @foreach ($artistList as $artist)
+                                <option value="{{ $artist->AR_ID}}" class="font-weight-bold">
+                                    {{ $artist->AR_NAME }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Tên Nghệ sĩ 2-->
+                    <div class="form-group row">
+                        <label for="artist2" class="col-md-3 col-form-label">Nghệ Sĩ 1</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="artist_id2" id="artist2">
+                                @foreach ($artistList as $artist)
+                                <option value="{{ $artist->AR_ID}}" class="font-weight-bold">
+                                    {{ $artist->AR_NAME }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Tên Nghệ sĩ 3-->
+                    <div class="form-group row">
+                        <label for="artist3" class="col-md-3 col-form-label">Nghệ Sĩ 3</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="artist_id3" id="artist3">
                                 @foreach ($artistList as $artist)
                                 <option value="{{ $artist->AR_ID}}" class="font-weight-bold">
                                     {{ $artist->AR_NAME }}</option>

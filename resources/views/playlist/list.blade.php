@@ -5,7 +5,7 @@
 @section('main-container')
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-primary font-weight-bold">Bài Hát</h1>
+    <h1 class="h3 mb-0 text-primary font-weight-bold">Playlist</h1>
 </div>
 
 <!-- Page Body -->
@@ -15,7 +15,7 @@
         <!-- Content Row -->
         <div class="row mb-4">
             <div class="col-md-2">
-                <a href="{{ url('song/create') }}" class="btn btn-success">Tạo Mới</a>
+                <a href="{{ url('playlist/create') }}" class="btn btn-success">Tạo Mới</a>
             </div>
         </div>
 
@@ -30,8 +30,8 @@
                             <th>#</th>
                             <th>Mã</th>
                             <th>Ảnh</th>
-                            <th>Tên Bài Hát</th>
-                            <th>Nghệ Sĩ</th>
+                            <th>Tên Playlist</th>
+                            <th>Mô Tả</th>
                             <th>Thể Loại</th>
                             <th>Thao Tác</th>
                         </tr>
@@ -41,30 +41,33 @@
                         $number = 1
                         @endphp
 
-                        @if ( isset($songList) )
-                        @foreach($songList as $song)
+                        @if ( isset($playlists) )
+                        @foreach($playlists as $playlist)
                         <tr>
                             <td>{{ $number }}</td>
-                            <td>{{ $song->SO_ID }}</td>
+                            <td>{{ $playlist->PL_ID }}</td>
                             <td>
-                                <image src={{ "storage/song-image/$song->SO_IMG" }} alt="img" width="80">
+                                <image src={{ "storage/playlist-image/$playlist->PL_IMG" }} alt="img" width="80">
                             </td>
-                            <td>{{ $song->SO_NAME }}</td>
-                            <td class="text-right font-weight-bold text-primary">
+                            <td>{{ $playlist->PL_NAME }}</td>
+                            <td class="font-weight-bold text-primary">
+                                @if ( $playlist->PL_TYPE == 1)
+                                {{"Chủ Đề Hot"}}
 
-                                @foreach($song->ARTISTS as $artist)
-                                {{ $artist->AR_NAME . ","}}
+                                @elseif( $playlist->PL_TYPE == 2)
+                                {{"Top 100"}}
 
-                                @endforeach
+                                @elseif ( $playlist->PL_TYPE == 3)
+                                {{"Thư Thả Bên Quán Quen"}}
+                                @endif
+
                             </td>
+                            <td>{{ $playlist->PL_DES }}</td>
                             <td>
-                                {{ $song->GE_NAME }}
-                            </td>
-                            <td>
-                                <a href="{{ url("song/info/$song->SO_ID") }}" class="btn btn-info btn-sm">
+                                <a href="{{ url("playlist/info/$playlist->PL_ID") }}" class="btn btn-info btn-sm">
                                     <i class="fas fa-info-circle"></i>
                                 </a>
-                                <a href="{{ url("song/delete/$song->SO_ID ") }}"
+                                <a href="{{ url("playlist/delete/$playlist->PL_ID ") }}"
                                     class="btn btn-danger btn-circle btn-sm btn-delete"
                                     onclick="return confirmDelete(this)">
                                     <i class=" fas fa-trash"></i>
