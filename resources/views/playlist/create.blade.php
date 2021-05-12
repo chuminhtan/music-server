@@ -51,13 +51,24 @@
                         </div>
                     </div>
 
-                    <!-- ảnh -->
+                    <!-- ảnh vuông-->
                     <div class="form-group row">
-                        <label for="playlist_image" class="col-md-3 col-form-label">Ảnh đại diện</label>
+                        <label for="playlist_image" class="col-md-3 col-form-label">Ảnh vuông</label>
                         <div class="col-sm-8">
                             <input type="file" name="playlist_image" class="form-control mb-3 p-1" accept="image/*"
                                 id="playlist_image" required>
                             <img id="output" src="{{ asset('images/default.png')}}" width="300"
+                                style="border:2px solid #000; border-radius: 5px;" />
+                        </div>
+                    </div>
+
+                    <!-- ảnh chữ nhật-->
+                    <div class="form-group row">
+                        <label for="playlist_image2" class="col-md-3 col-form-label">Ảnh Chữ Nhật</label>
+                        <div class="col-sm-8">
+                            <input type="file" name="playlist_image2" class="form-control mb-3 p-1" accept="image/*"
+                                id="playlist_image2" required>
+                            <img id="output2" src="{{ asset('images/default.png')}}" width="300"
                                 style="border:2px solid #000; border-radius: 5px;" />
                         </div>
                     </div>
@@ -152,7 +163,7 @@
         })
         @endif
 
-        // Hiển thị ảnh upload
+        // Hiển thị ảnh upload vuông
         let image_input_DOM = document.querySelector("#playlist_image");
         image_input_DOM.addEventListener("input", () => {
             let reader = new FileReader();
@@ -165,6 +176,21 @@
             };
 
             reader.readAsDataURL(image_input_DOM.files[0]);
+        });
+
+        // Hiển thị ảnh upload chữ nhật
+        let image_input_DOM2 = document.querySelector("#playlist_image2");
+        image_input_DOM2.addEventListener("input", () => {
+            let reader = new FileReader();
+            let output = document.querySelector("#output2");
+
+            reader.onload = (e) => {
+                console.log(e.target);
+                console.log(output);
+                output.src = e.target.result;
+            };
+
+            reader.readAsDataURL(image_input_DOM2.files[0]);
         });
     </script>
     @endsection

@@ -107,6 +107,11 @@ class PlaylistController extends Controller
                 $imageName = basename(($imagePath)); // trả về tên file
             }
 
+            if ($request->hasFile('playlist_image2')) {
+                $imagePath2 = Storage::putFile('playlist-image', $request->file('playlist_image2'));
+                $imageName2 = basename(($imagePath2)); // trả về tên file
+            }
+
 
             // Lưu PLAYLIST DB
             $playlistId = DB::table('playlist')
@@ -114,7 +119,8 @@ class PlaylistController extends Controller
                     'PL_NAME' => $data['PL_NAME'],
                     'PL_DES' => $data['PL_DES'],
                     'PL_TYPE' => $data['PL_TYPE'],
-                    'PL_IMG' => $imageName
+                    'PL_IMG' => $imageName,
+                    'PL_IMG2' => $imageName2
                 ]);
 
 
