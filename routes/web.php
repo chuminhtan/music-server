@@ -30,6 +30,8 @@ Route::group(['prefix' => 'song'], function () {
     //api
     Route::get('/new', "SongController@GetNew");
     Route::get('/{id}', 'SongController@GetSong');
+    Route::get('/search/{name}', 'SongController@getSongInfoByName');
+    Route::get('/songrelate/{word}', 'SongController@getListSongRelated');
 });
 
 
