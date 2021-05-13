@@ -47,6 +47,7 @@ Route::group(['prefix' => 'playlist'], function () {
     // api
     Route::get('/newest', 'PlaylistController@getNewest');
     Route::get('/type/{type}', 'PlaylistController@getPlaylistByType');
+    Route::get('/user/{userId}', 'PlaylistController@getPlaylistByUserId');
 });
 
 

@@ -140,4 +140,15 @@ class PlaylistController extends Controller
         Session::flash('success', 'Đã Upload');
         return Redirect::to('playlist');
     }
+
+
+    // GET
+    // Lấy Danh Sách Playlist Theo USER_ID
+    public function getPlaylistByUserId($userId)
+    {
+
+        $playlists = DB::table("playlist")->where("US_ID", '=', $userId)->get();
+
+        return $playlists;
+    }
 }
