@@ -26,6 +26,7 @@ class CollectionController extends Controller
 
             $songs = DB::table('collection')
                 ->join('song', 'song.SO_ID', '=', 'collection.SO_ID')
+                ->where('PL_ID', '=', $playlistId)
                 ->get();
 
             for ($i = 0; $i < sizeof($songs); $i++) {

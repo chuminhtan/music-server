@@ -140,21 +140,42 @@ class SongController extends Controller
 
     // GET
     // Lấy thông tin danh sách bài hát liên quan 
-    public function getListSongRelated(Request $request, $word) {
-        $host = $request->getHttpHost();
-        $songList = DB::table('SONG')
-                ->where('SO_NAME', 'LIKE', ''.$word.'%')
+    public function getListSongRelated(Request $request, $word)
+    {
+
+        // $songList = DB::table('SONG')
+        //         ->where('SO_NAME', 'LIKE', ''.$word.'%')
+        //         ->join('artist_song', 'artist_song.song')
+        //         ->get();
+
+        $songs = DB::table('collection')
+            ->join('song', 'song.SO_ID', '=', 'collection.SO_ID')
+            ->where('SONG.SO_NAME', 'LIKE', '' . $word . '%')
+            ->get();
+
+        for ($i = 0; $i < sizeof($songs); $i++) {
+            $songId = $songs[$i]->SO_ID;
+
+            $artists = DB::table('artist')
+                ->join('artist_song', 'artist_song.AR_ID', '=', 'artist.AR_ID')
+                ->where('artist_song.SO_ID', '=', $songId)
+                ->select(['artist.AR_ID', 'artist.AR_NAME'])
                 ->get();
-        return $songList;
+
+
+            $songs[$i]->ARTISTS =  $artists;
+        }
+        return $songs;
     }
 
     // GET
     // Lấy thông tin bài hát bằng tên bài hát
-    public function getSongInfoByName(Request $request, $name) {
+    public function getSongInfoByName(Request $request, $name)
+    {
         $host = $request->getHttpHost();
         $listsong = DB::table('SONG')
-                ->where('SO_NAME', '=' , $name);
-        
+            ->where('SO_NAME', '=', $name);
+
         return $listsong;
     }
 }
