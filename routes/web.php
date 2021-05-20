@@ -64,4 +64,6 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/liked-song/{user_id}', 'UserController@getLikedSong'); // Lấy danh sách tất cả bài hát của 1 playlist bằng playlist_id
     Route::get('/liked-playlist/{user_id}', 'UserController@getLikedPlaylist'); // Lấy danh sách tất cả bài hát của 1 playlist bằng playlist_id
     Route::get('/playlist/{userId}', 'UserController@getPlaylistByUserId');
+    Route::post('/register', 'UserController@register');
+    Route::post('/login', 'UserController@login');
 });
