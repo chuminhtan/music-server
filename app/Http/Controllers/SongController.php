@@ -148,10 +148,16 @@ class SongController extends Controller
         //         ->join('artist_song', 'artist_song.song')
         //         ->get();
 
-        $songs = DB::table('collection')
-            ->join('song', 'song.SO_ID', '=', 'collection.SO_ID')
-            ->where('SONG.SO_NAME', 'LIKE', '' . $word . '%')
+        $songs = DB::table('SONG')->where('SONG.SO_NAME', 'LIKE', '' . $word . '%')
             ->get();
+
+
+        // $songs = DB::table('collection')
+        //     ->join('song', 'song.SO_ID', '=', 'collection.SO_ID')
+        //     ->where('SONG.SO_NAME', 'LIKE', '' . $word . '%')
+        //     ->get();
+
+
 
         for ($i = 0; $i < sizeof($songs); $i++) {
             $songId = $songs[$i]->SO_ID;
@@ -162,9 +168,10 @@ class SongController extends Controller
                 ->select(['artist.AR_ID', 'artist.AR_NAME'])
                 ->get();
 
-
             $songs[$i]->ARTISTS =  $artists;
         }
+        // dd($songs);
+
         return $songs;
     }
 
