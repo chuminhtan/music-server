@@ -38,7 +38,7 @@
                             <select class="form-control" name="playlist_type" id="playlist_type">
                                 <option value="1" class="font-weight-bold">Hot</option>
                                 <option value="2" class="font-weight-bold">Top 100</option>
-                                <option value="3" class="font-weight-bold">Thư Thả Bên Quán Quen</option>
+                                <option value="3" class="font-weight-bold">Tâm Trạng và Làm Việc</option>
                             </select>
                         </div>
                     </div>

@@ -58,7 +58,7 @@
                                 {{"Top 100"}}
 
                                 @elseif ( $playlist->PL_TYPE == 3)
-                                {{"Thư Thả Bên Quán Quen"}}
+                                {{"Tâm Trạng và Làm Việc"}}
                                 @endif
 
                             </td>
