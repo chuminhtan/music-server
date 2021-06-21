@@ -92,8 +92,6 @@ class SongController extends Controller
                 ->insertGetId([
                     'SO_NAME' => $data['song_name'],
                     'GE_ID' => $data['GE_ID'],
-                    'AR_ID2' => $data['AR_ID2'],
-                    'AR_ID3' => $data['AR_ID3'],
                     'SO_SRC' => $songName,
                     'SO_IMG' => $imageName
                 ]);
