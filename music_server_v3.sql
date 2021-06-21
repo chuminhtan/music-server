@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 12, 2021 lúc 05:31 PM
+-- Thời gian đã tạo: Th6 21, 2021 lúc 08:05 AM
 -- Phiên bản máy phục vụ: 10.4.14-MariaDB
 -- Phiên bản PHP: 7.2.34
 
@@ -33,6 +33,13 @@ CREATE TABLE `album` (
   `AL_NAME` varchar(100) COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `AL_IMG` varchar(500) COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `album`
+--
+
+INSERT INTO `album` (`AL_ID`, `AR_ID`, `AL_NAME`, `AL_IMG`) VALUES
+(1, 6, 'Tuyển Tập Sơn Tùng', NULL);
 
 -- --------------------------------------------------------
 
@@ -70,7 +77,14 @@ INSERT INTO `artist` (`AR_ID`, `AR_NAME`, `AR_STORY`, `AR_IMG`) VALUES
 (18, 'Rhymastic', NULL, NULL),
 (19, 'Suni Hạ Linh', NULL, NULL),
 (20, 'Vũ', NULL, NULL),
-(21, 'Lou Hoàng', NULL, NULL);
+(21, 'Lou Hoàng', NULL, NULL),
+(22, 'Akon', NULL, NULL),
+(23, 'Alan Walker', NULL, NULL),
+(24, 'McFly', NULL, NULL),
+(25, 'Whitney Houston', NULL, NULL),
+(26, 'Nelly', NULL, NULL),
+(27, 'O-Town', NULL, NULL),
+(28, 'Blue', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -83,6 +97,41 @@ CREATE TABLE `artist_song` (
   `SO_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `artist_song`
+--
+
+INSERT INTO `artist_song` (`AR_ID`, `SO_ID`) VALUES
+(6, 10),
+(7, 10),
+(8, 11),
+(9, 11),
+(10, 12),
+(2, 13),
+(13, 14),
+(15, 15),
+(16, 16),
+(19, 17),
+(17, 17),
+(18, 17),
+(20, 18),
+(17, 19),
+(21, 20),
+(8, 20),
+(1, 20),
+(22, 21),
+(1, 21),
+(1, 21),
+(23, 22),
+(1, 22),
+(1, 22),
+(24, 23),
+(1, 23),
+(1, 23),
+(25, 24),
+(1, 24),
+(1, 24);
+
 -- --------------------------------------------------------
 
 --
@@ -93,6 +142,176 @@ CREATE TABLE `collection` (
   `PL_ID` int(11) NOT NULL,
   `SO_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `collection`
+--
+
+INSERT INTO `collection` (`PL_ID`, `SO_ID`) VALUES
+(1, 16),
+(1, 15),
+(1, 14),
+(1, 13),
+(1, 12),
+(1, 11),
+(2, 19),
+(2, 18),
+(2, 17),
+(2, 16),
+(2, 15),
+(3, 10),
+(3, 11),
+(3, 12),
+(3, 13),
+(3, 14),
+(3, 15),
+(3, 16),
+(4, 11),
+(4, 12),
+(4, 15),
+(4, 17),
+(4, 18),
+(5, 15),
+(5, 16),
+(5, 17),
+(5, 18),
+(6, 10),
+(6, 11),
+(6, 12),
+(6, 13),
+(6, 14),
+(6, 15),
+(6, 16),
+(6, 17),
+(7, 10),
+(7, 12),
+(7, 13),
+(7, 14),
+(7, 15),
+(7, 16),
+(8, 16),
+(8, 17),
+(8, 18),
+(8, 19),
+(8, 20),
+(9, 15),
+(9, 16),
+(9, 17),
+(9, 18),
+(9, 19),
+(9, 20),
+(10, 15),
+(10, 16),
+(10, 17),
+(11, 17),
+(11, 18),
+(12, 10),
+(12, 11),
+(12, 12),
+(12, 13),
+(12, 14),
+(12, 15),
+(13, 21),
+(13, 22),
+(13, 23),
+(13, 24),
+(14, 16),
+(14, 17),
+(14, 18),
+(15, 10),
+(15, 11),
+(15, 12),
+(15, 13),
+(15, 14),
+(15, 15),
+(15, 16),
+(15, 17),
+(15, 18),
+(15, 19),
+(15, 20),
+(15, 21),
+(16, 15),
+(16, 16),
+(16, 17),
+(16, 18),
+(17, 11),
+(17, 12),
+(17, 13),
+(17, 14),
+(17, 15),
+(17, 16),
+(17, 17),
+(17, 18),
+(18, 12),
+(18, 13),
+(18, 14),
+(18, 15),
+(18, 21),
+(18, 22),
+(18, 23),
+(18, 24),
+(19, 10),
+(19, 11),
+(19, 12),
+(19, 13),
+(19, 14),
+(19, 15),
+(19, 16),
+(19, 17),
+(19, 18),
+(21, 12),
+(21, 13),
+(21, 14),
+(21, 15),
+(21, 16),
+(22, 12),
+(22, 13),
+(22, 14),
+(22, 15),
+(22, 16),
+(22, 17),
+(22, 18),
+(23, 10),
+(23, 11),
+(23, 12),
+(23, 13),
+(23, 14),
+(23, 15),
+(23, 16),
+(23, 17),
+(24, 14),
+(24, 15),
+(24, 16),
+(24, 17),
+(24, 18),
+(25, 18),
+(25, 19),
+(25, 20),
+(25, 21),
+(25, 22),
+(26, 11),
+(26, 12),
+(26, 13),
+(26, 14),
+(26, 15),
+(26, 16),
+(26, 17),
+(26, 18),
+(27, 14),
+(27, 15),
+(27, 16),
+(27, 17),
+(27, 18),
+(27, 22),
+(27, 23),
+(27, 24),
+(28, 10),
+(28, 11),
+(28, 12),
+(28, 13),
+(28, 14),
+(28, 15),
+(28, 21);
 
 -- --------------------------------------------------------
 
@@ -130,6 +349,13 @@ CREATE TABLE `like_album` (
   `US_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `like_album`
+--
+
+INSERT INTO `like_album` (`AL_ID`, `US_ID`) VALUES
+(1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -141,6 +367,15 @@ CREATE TABLE `like_playlist` (
   `US_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `like_playlist`
+--
+
+INSERT INTO `like_playlist` (`PL_ID`, `US_ID`) VALUES
+(14, 1),
+(15, 1),
+(16, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -151,6 +386,17 @@ CREATE TABLE `like_song` (
   `SO_ID` int(11) NOT NULL,
   `US_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `like_song`
+--
+
+INSERT INTO `like_song` (`SO_ID`, `US_ID`) VALUES
+(10, 1),
+(11, 1),
+(12, 1),
+(13, 1),
+(14, 1);
 
 -- --------------------------------------------------------
 
@@ -168,6 +414,28 @@ CREATE TABLE `playlist` (
   `PL_IMG2` varchar(500) COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'Ảnh Chữ Nhật'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `playlist`
+--
+
+INSERT INTO `playlist` (`PL_ID`, `US_ID`, `PL_NAME`, `PL_DES`, `PL_TYPE`, `PL_IMG`, `PL_IMG2`) VALUES
+(12, 1, 'Good Morning', 'Đừng đợi đến cuối ngày mới tiếc nuối những việc mình chưa làm hôm nay, hãy cùng khởi động ngày mới cùng Topic \"Good Morning\" để tiếp thêm năng lượng, động lực và niềm cảm hứng cho mọi việc!', 1, 'nZEBwVVQrPVSPHxqhMSyXrUNHCQW3ctujEOGzVvg.jpg', 'wlBpP7lfFH5cwq4S9wZ3h8mRO5517dbREmGHzfzj.jpg'),
+(13, 1, 'Hot US-UK', 'Các Ca Khúc Gây US-UK Hay Nhất', 1, 'klI7KQxzEJARuf2UVfL2pACBjZVSsF4h5XNGxVj7.jpg', '8vUJB3RRBeeSrX569mil2lGi0UWTmWMak9qVbpWw.jpg'),
+(14, 1, 'Chào Buổi Tối', 'Không Gian Tuyệt Đẹp', 1, 'T5fCgRXGpyX39g679j2sNuPdLdUckH5qO6ftI9cX.jpg', 'tkZQc1tcQe72DhKuyl3hXQlauji52NwTtEZbEQqG.jpg'),
+(15, 1, 'Top 100 Nhạc Trẻ', '100 Bài Nhạc Trẻ Hay Nhất', 2, 'ykR85vtbYv8qJzneXdo9DE93BpxbclwvdAvx44sH.jpg', 'oQRXc78wopcMlCwu5Ub7ADd1l7BJXLaMF2b616Ic.jpg'),
+(16, 1, 'Top 100 C-POP', '100 Bài Nhạc Trung Quốc Hay Nhất', 2, 'o8PgNEdEovjgDAbH3NH9AJOGsGsRF6ji5ADGBxtq.jpg', 'etiwxzCR9D2nLozMdejAQl9HJwvlRjTSsSpeXCau.jpg'),
+(17, 0, 'Âu Mỹ', '100 Bài Âu Mỹ Hay Nhất', 1, '5pxg8ukccKQ0xbHMjKReC6cVKj4Um55v2zwR4ws7.jpg', '24yFuqNnh0wjb1U38LarUybmdRwonK8H6tYy7QJr.jpg'),
+(18, 0, 'Remix Việt', '100 Bài Remix Việt Hay Nhất', 2, 'TtZK60UXob3MHOL4jELiJWlN9SjK5cRWDvAJmnei.jpg', 'yKWha9V8sLaDOQ5ya25CYII4onbVdhNQny7lWMZV.jpg'),
+(19, 0, 'US-UK EDM Remix', 'Các Bản Nhạc Remix Cực Sôi Động', 2, 'zWiMSleYLST1WIeRqpLDV1pizSSNhQDmC643ylP2.jpg', 'Ve1YBA9TkgdYYL2g6bcgCeD3Kvgu1ZmQSFr7AFhM.jpg'),
+(21, 0, 'K-POP Remix', 'Các Bản Nhạc K-POP Remix Hay Nhất', 1, 'n4EwT6Ysrbg3HahLjoL0yppgDM5OocmUwX65AbNt.jpg', 'xXxzlxkoAi3BNqUwAIliOhDM054bGpfDcQ8xVN8P.jpg'),
+(22, 0, 'US-UK Dance Rewind', 'Các Bản Nhạc US-UK Hay Nhất', 2, 'ghIyEj00ldr9lVJWLOmkz6eXKvg6jraqnh8sHyUq.jpg', '4wTlndB5DcX1duHaog2kMhVQQaqoPaata6SnmWlq.jpg'),
+(23, 0, 'Du Lịch', 'Nhạc Đi Du Lịch', 3, 'TkaVUkToIq9Hgxihupn2mKSeNQtxNvvGTkxEHGS1.jpg', 'wjl5qzyfZ0JTh6eGdfgGbMTO780KNOvATQlwDob4.jpg'),
+(24, 0, 'Ngủ Ngon', 'Nhạc Giúp Ngủ Ngon Giấc', 3, 'HVFivJE9a6kQD36165kluyp1wkYZDaCWUSKDJRvB.jpg', 'dL9TlFHe6SNRdkpbfWCXUBnMW6FjiZIbKzuyS07V.jpg'),
+(25, 0, 'Workout', 'Luyện Tập Cho Ngày Dài Đầy Năng Lượng', 3, 'uLqhUNzqEoaLEek07XWBknFY6OafrvPICIjEpRpb.jpg', 'fhnQcFpXPxTA4ccZwKWQvGnT0n5OIFlXSiTpjV6f.jpg'),
+(26, 0, 'Tiệc Tùng', 'Cùng Hội Bạn Quẩy Tưng Bừng', 3, 'm8brWioH41cFyYMInhljhbHfdgXtFaVC42pb4sMQ.jpg', '8bEUKrXuVrm7gSr9dikUK7uqZrbS29l65CxzW1DM.jpg'),
+(27, 0, 'Spa - Yoga', 'Nhạc Giúp Luyện Tập Thư Thái', 3, 'lyG2BWYlJAioRW0ceHvBSOySUWxWGQTHQ9Z0D3NN.jpg', 'GmmEw3EEHU4mrq1zkt0LoFhozp8esjDWuMx5FzFa.jpg'),
+(28, 0, 'Tình Yêu', 'Các Tình Khúc Cho Tình Yêu Thêm Mặn Nồng', 3, '7RBQzOiMkxr1B917ETqw24r7kEyeUG1Jz2gFSVQ4.jpg', 'lxLDTl3uGEzPKxTiTPml9ritX45ZmwPFQqdN29eC.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -177,14 +445,32 @@ CREATE TABLE `playlist` (
 CREATE TABLE `song` (
   `SO_ID` int(11) NOT NULL,
   `GE_ID` int(11) NOT NULL,
-  `AR_ID` int(11) DEFAULT NULL COMMENT 'Nghệ Sĩ 1',
-  `AR_ID2` int(11) DEFAULT NULL COMMENT 'Nghệ Sĩ 2',
-  `AR_ID3` int(11) DEFAULT NULL COMMENT 'Nghệ Sĩ 3',
   `AL_ID` int(11) DEFAULT NULL,
   `SO_NAME` varchar(100) COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `SO_SRC` varchar(500) COLLATE utf8_vietnamese_ci NOT NULL,
   `SO_IMG` varchar(500) COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `song`
+--
+
+INSERT INTO `song` (`SO_ID`, `GE_ID`, `AL_ID`, `SO_NAME`, `SO_SRC`, `SO_IMG`) VALUES
+(10, 7, NULL, 'Bánh Mì Không', 'ocqvZPKwZ6YpgixGr5qFcnD9c3Q3Eb6edsnkm2CS.mp3', 's15WNAE36hh8LGaTAa2tvjck9jHtjAvl5U8viPiP.jpg'),
+(11, 7, NULL, 'Có Lẽ Anh Chưa Từng', 'Iz9P2BXyINKQhf69rDQ431tPYaBhwBgG5x1PvV3z.mp3', '2qxf7AEFMwr8HoB6IiNjKGiOFi07a116ZclPnsXj.jpg'),
+(12, 1, NULL, 'Phía Sau Một Cô Gái', 'OEZUNIplRtspq4ay3NJjOZqS8jPtPa90Fl2aGusp.mp3', 'Lis8sszX4leNbF8LMupeKp1XZPPsaSHaObN6ChPa.jpg'),
+(13, 7, NULL, 'Muộn Rồi Mà Sao Còn', 'D1CGF3ER72IWdm3O7ktEL5kokdp5ykVcBVLCPXaE.mp3', 'K2tCqeLwregsY9upGxHa85XdQlzmrgr1wkg6BGUc.jpg'),
+(14, 7, NULL, 'Nàng Thơ', 'tqBTz7p4RE474gBDUlmgy1jnKwCKMXetbacQB0sS.mp3', '1uZzeuy610kg7xU9MPYSKkBijeJTmUPg1VUhZpIi.jpg'),
+(15, 7, NULL, 'Đúng Cũng Thành Sai', '02knS2hu8hCqD8I6Up0KAUJsXlPzhACXE15NegTV.mp3', 'JfSBGMtsAJtlceasTvRViKfVBVuuw3msPsQlra7Z.jpg'),
+(16, 7, NULL, 'Cho Em Gần Anh Thêm Chút Nữa', 'sxG39NiqNaP5IJjeqFSrGDJw3SA8R8lgJTc9dWbK.mp3', 'FpZX7JkMIeiaUVZ3Me2tEyk2n6oRlGnXVMoaoiVZ.jpg'),
+(17, 1, NULL, 'Cứ Chill Thôi', '1PdfxekL0mm4jPc4wUrCM1rNOjd0mqj7jrJJIoah.mp3', 'rqpg6RhApuW8oK6TXLQD57BQIwpnk5HOfYldN0SQ.jpg'),
+(18, 7, NULL, 'Lạ Lùng', 'DhfGuJpTXRAmFNH5IRmhaOoxpRj14smVEjxcDXdO.mp3', 'l3AwVnmgqp1qPRc1lUUViTZ8iFPXZiX33hguIGGY.jpg'),
+(19, 1, NULL, 'Và Thế Là Hết', 'Gjuq4bwJajmjX7vHqlecWtjzJ5w83FNTTgxTn7Az.mp3', '1LGvSXtjsMa1ugnWu75S98bvgDUvU7azKhv5rsSI.jpg'),
+(20, 1, NULL, 'Là Bạn Không Thể Yêu', 'PXaZTSAeqQf1i1ugguv83o5W6mJrbkTI4ntRTuRl.mp3', '7N0vcy5KfZ2abMgv201vGjUOevWLmGJkHoiz4n7r.jpg'),
+(21, 4, NULL, 'I Can\'t Wait', 'Vmbv7HIWQCnoITFedZACofrj130TVciCrE5lrty7.mp3', 'oRxL3S4rirAM0JlkjjFiWlBGlfMq2qwViMmukuCB.jpg'),
+(22, 1, NULL, 'Faded', 'ozL4nAVKMGWGfYu4CMs3CRjGJr9X1CJlIQmxmGag.mp3', 'kxde1TXkLeqUY6szRmhdAZZ1UULHWYA3w0Zpkadm.jpg'),
+(23, 1, NULL, 'All About You', 'xvbb7iG5Px8PpSFXTzobYNW8T69XrFZADfITGzkt.mp3', 'eFIv6M1clH1yiDvrg7Xu9p27rws9kPE9MtsCzj6Q.jpg'),
+(24, 1, NULL, 'All At Once', 'ExJ39qQ7BQwb4Nls33sgwGCJn3XhLnfgmAbXjQ3D.mp3', 't3SGBngZeHGBoTuGgnmtjZr8HJsvLL0UQZCGUA5A.jpg');
 
 -- --------------------------------------------------------
 
@@ -199,6 +485,28 @@ CREATE TABLE `user` (
   `US_PASS` varchar(100) COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `US_TYPE` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `user`
+--
+
+INSERT INTO `user` (`US_ID`, `US_NAME`, `US_EMAIL`, `US_PASS`, `US_TYPE`) VALUES
+(1, 'Chu Minh Tân', 'cmt@gmail.com', '$2y$10$A0BWa9pDixkz/EL/ja3CHe5XgkT7rHP1W7PxjfzVYAfwLmvV3ZAqC', 1),
+(2, 'Chu Minh Tân', 'cmt1@gmail.com', '$2y$10$2.MzQcf4g10FqCjcPLKrGO/ozE6XTqrwrh29N6KIs2GmIYiGztkOa', 1),
+(3, 'Chu Minh Tân', 'cmt2@gmail.com', '$2y$10$b1a1MfqqJwwP5epgOOohh.dQdRvr5AxgXi1HadQyhyG2VMUnuTMle', 1),
+(4, 'Chu Minh Tân', 'cmt3@gmail.com', '$2y$10$GiCJ5W.fRvPzjGvwSMsRh.4HQ2Zgoyl8iWcEsArdh7fye8tSPDA6u', 1),
+(5, 'Nguyen Minh Tan', 'cmt123456@gmail.com', '$2y$10$yVg9b6qaaTpv1eS.HiLEu.HQAF7HJebIQbIoDRbVurHmKGZPc3kJK', 1),
+(6, 'Nguyen Minh Tan', 'cmt1234567@gmail.com', '$2y$10$j2vU0RC1QrUF2jxBOddJ5uoVGp8NYbiGVyVUaAlK6flMGBXbmvc1K', 1),
+(7, 'Nguyen Van A', 'nguyenvana@gmail.com', '$2y$10$rBpRsqiYnsirl47ZYfvoluOlnEIPPG4MYra561LKKHg/Kcy55sXp6', 1),
+(8, 'nguyenvana', 'nguyen@gmail.com', '$2y$10$.EITH81oPe12jdHyT7taL.XF88moeNf/Fmbx7fddBiJfje41Y0jmK', 1),
+(9, 'adfasdfadsf', 'alibaba@gmail.com', '$2y$10$fvzG92nJIjn2NkzIK72fYuxb77YeYA7xLTQB4c60Z.r7ZV8gD03gK', 1),
+(10, 'hello1', 'hello2@gmail.com', '$2y$10$xBIMLSW5ZUBY/H7jzXidyOJL67k6GCuVt/VYyHIZpZucUJp0fHjNO', 1),
+(11, 'nguyenvanb', 'nguyenvanb@gmail.com', '$2y$10$edfexZkSGbJ7gccxsVtXzeNCe2LK7csByXy7T/Sst7hyV9gkY3.w2', 1),
+(12, 'nguyenc', 'nguyenc@gmail.com', '$2y$10$Y2xUzivGUsG07JtQziznPudYaGi23zRKWOloOHnPhfV67q57X2emS', 1),
+(13, 'Trường Chinh', 'truongchinh@gmail.com', '$2y$10$pGow3egS1Gs94vvOyaBGa.V5OJ81flONQ0jSKnpY//T2mnOy7DMGa', 1),
+(14, 'new user', 'newuser@gmail.com', '$2y$10$ZHnIVDGnmAYlh25kCUwXo.TDDIemI3.GMH9cfK22mumGvhvYKM/6G', 1),
+(15, 'User 5', 'newuser5@gmail.com', '$2y$10$Y1EwFlbE6cHgcArH1TFOTuQzXjZxvO8Ko2.89S2uFi2Wyu7C1HWdi', 1),
+(16, 'new user 6', 'newuser6@gmail.com', '$2y$10$TV/pRXcQHCgbj0lpOD9.qeuZrlNdPeMFXzWdq12etlrPzjfdhKOI6', 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -266,13 +574,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `album`
 --
 ALTER TABLE `album`
-  MODIFY `AL_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `AL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `artist`
 --
 ALTER TABLE `artist`
-  MODIFY `AR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `AR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT cho bảng `genre`
@@ -284,19 +592,19 @@ ALTER TABLE `genre`
 -- AUTO_INCREMENT cho bảng `playlist`
 --
 ALTER TABLE `playlist`
-  MODIFY `PL_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT cho bảng `song`
 --
 ALTER TABLE `song`
-  MODIFY `SO_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `SO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `US_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `US_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
