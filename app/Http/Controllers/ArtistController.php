@@ -32,7 +32,27 @@ class ArtistController extends Controller
     // Create
     public function createArtistView()
     {
-        return view("artist.create");
+
+        $songList = DB::table('SONG')
+            ->join('GENRE', 'GENRE.GE_ID', '=', 'SONG.GE_ID')
+            ->get();
+
+        // dd($songList);
+
+        for ($i = 0; $i < sizeof($songList); $i++) {
+
+            $songId = $songList[$i]->SO_ID;
+
+            $artists = DB::table('artist')
+                ->join('artist_song', 'artist_song.AR_ID', '=', 'artist.AR_ID')
+                ->where('artist_song.SO_ID', '=', $songId)
+                ->select(['artist.AR_ID', 'artist.AR_NAME'])
+                ->get();
+            $songList[$i]->ARTISTS =  $artists;
+        }
+
+
+        return view('artist.create', ['songList' => $songList]);
     }
 
     // VIEW - POST

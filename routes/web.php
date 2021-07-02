@@ -84,3 +84,11 @@ Route::group(['prefix' => 'artist'], function () {
 
 
 });
+
+// ALBUM
+Route::group(['prefix' => 'album'], function () {
+    // view
+    Route::get('/', 'AlbumController@listAlbumView');
+    Route::get('/create', "AlbumController@createAlbumView");
+    Route::post('/create', "AlbumController@createAlbum");
+});

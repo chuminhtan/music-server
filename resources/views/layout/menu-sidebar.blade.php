@@ -37,7 +37,7 @@
 
 
     <!-- ALBUM- Pages Collapse Menu -->
-    {{-- <li class="nav-item @if (request()->is('album/*')) active @endif">
+    <li class="nav-item @if (request()->is('album/*')) active @endif">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAlbum" aria-expanded="true"
             aria-controls="collapseAlbum">
             <i class="fas fa-id-badge"></i>
@@ -49,11 +49,12 @@
                 <h6 class="collapse-header">Quản Lý Album</h6>
                 <a class="collapse-item @if ((request()->is('album/*') || request()->is('album/list')) && !request()->is('album/create')) active @endif"
                     href="{{ url('album') }}">Danh Sách</a>
-    <a class="collapse-item @if (request()->is('album/create')) active @endif" href="{{ url('album/create') }}">Tạo
-        Mới</a>
-    </div>
-    </div>
-    </li> --}}
+                <a class="collapse-item @if (request()->is('album/create')) active @endif"
+                    href="{{ url('album/create') }}">Tạo
+                    Mới</a>
+            </div>
+        </div>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
