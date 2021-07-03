@@ -30,10 +30,8 @@ class CollectionController extends Controller
                     ->select(['artist.AR_ID', 'artist.AR_NAME'])
                     ->get();
 
-
                 $songs[$i]->ARTISTS =  $artists;
             }
-
 
             return response()->json(['playlist' => $playlist, 'songs' => $songs]);
         } catch (Exception $e) {

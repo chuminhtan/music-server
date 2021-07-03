@@ -123,11 +123,11 @@ class AlbumController extends Controller
                     ->select(['artist.AR_ID', 'artist.AR_NAME'])
                     ->get();
 
-
                 $songs[$i]->ARTISTS =  $artists;
-
-                return response()->json(['album' => $album, 'songs' => $songs]);
             }
+
+
+            return response()->json(['album' => $album, 'songs' => $songs]);
         } catch (Exception $ex) {
             return response()->json(['errors' => $ex->getMessage()]);
         }
