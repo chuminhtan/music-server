@@ -63,7 +63,7 @@ Route::group(['prefix' => 'collection'], function () {
 Route::group(['prefix' => 'user'], function () {
 
     // api
-    Route::get('/liked-song/{user_id}', 'UserController@getLikedSong'); // Lấy danh sách tất cả bài hát của 1 playlist bằng playlist_id
+    Route::get('/liked-song/{user_id}', 'UserController@getLikedSong'); // Lấy danh sách tất cả bài hát của 1 user
     Route::get('/liked-playlist/{user_id}', 'UserController@getLikedPlaylist'); // Lấy danh sách tất cả bài hát của 1 playlist bằng playlist_id
     Route::get('/playlist/{userId}', 'UserController@getPlaylistByUserId');
     Route::get('/liked/playlist/{user_id}', 'UserController@getPlaylistLiked'); // Lấy danh sách đã like
