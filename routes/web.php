@@ -71,7 +71,7 @@ Route::group(['prefix' => 'user'], function () {
 
     Route::post('/register', 'UserController@register');
     Route::post('/login', 'UserController@login');
-    Route::post('/like','UserController@like');
+    Route::post('/like', 'UserController@like');
     Route::get('/liked_song/{user_id}/{song_id}', 'UserController@checkLikeSong'); // Kiểm tra bài hát đã được thích hay chưa?
     Route::post('/new_userplaylist', 'UserController@createNewPlaylist'); // Add New User Playlist
     Route::post('/addsong_to_userplaylist', 'UserController@addSongToUserPlaylist'); // Add Song to Playlist
@@ -85,8 +85,7 @@ Route::group(['prefix' => 'artist'], function () {
     Route::post('/create', "ArtistController@createArtist");
 
     // api
-
-
+    Route::get('/artist-album/{artist_id}', "ArtistController@getAlbumByArtistId");
 });
 
 // ALBUM

@@ -81,4 +81,18 @@ class ArtistController extends Controller
             return Redirect::back();
         }
     }
+
+
+    // API - GET
+    public function getAlbumByArtistId($artistId)
+    {
+        try {
+            // Get Album
+            $albums = DB::table("ALBUM")->where("AR_ID", "=", $artistId)->get();
+
+            dd($albums);
+        } catch (Exception $ex) {
+            return response()->json(["error" => $ex->getMessage()]);
+        }
+    }
 }
