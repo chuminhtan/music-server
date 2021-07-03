@@ -15,14 +15,6 @@ class CollectionController extends Controller
 
         try {
             $playlist = DB::table('playlist')->where('PL_ID', '=', $playlistId)->first();
-            // $songs = DB::table('collection')
-            //     ->join('song', 'song.SO_ID', '=', 'collection.SO_ID')
-            //     ->join('artist_song', 'artist_song.SO_ID', 'song.SO_ID')
-            //     ->join('artist', 'artist_song.AR_ID', 'artist.AR_ID')
-            //     ->where('collection.PL_ID', '=', $playlistId)
-            //     ->select(['song.*', 'artist.AR_ID', 'artist.AR_NAME'])
-            //     ->groupBy('SO_ID')
-            //     ->get();
 
             $songs = DB::table('collection')
                 ->join('song', 'song.SO_ID', '=', 'collection.SO_ID')

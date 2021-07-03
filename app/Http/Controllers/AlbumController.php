@@ -100,4 +100,47 @@ class AlbumController extends Controller
         Session::flash('success', 'Đã Upload');
         return Redirect::to('album/create');
     }
+
+
+    // API - GET
+    public function getSongAlbumById($albumId)
+    {
+        try {
+            // Get album
+            $album = DB::table("ALBUM")->where("AL_ID", "=", $albumId)->get();
+            $songs = DB::table('ALBUM_SONG')
+                ->join("SONG", 'SONG.SO_ID', "=", "ALBUM_SONG.SO_ID")
+                ->where("ALBUM_SONG.AL_ID", "=", $albumId)
+                ->get();
+
+            // Get artist for song
+            for ($i = 0; $i < sizeof($songs); $i++) {
+                $songId = $songs[$i]->SO_ID;
+
+                $artists = DB::table('artist')
+                    ->join('artist_song', 'artist_song.AR_ID', '=', 'artist.AR_ID')
+                    ->where('artist_song.SO_ID', '=', $songId)
+                    ->select(['artist.AR_ID', 'artist.AR_NAME'])
+                    ->get();
+
+
+                $songs[$i]->ARTISTS =  $artists;
+
+                return response()->json(['album' => $album, 'songs' => $songs]);
+            }
+        } catch (Exception $ex) {
+            return response()->json(['errors' => $ex->getMessage()]);
+        }
+    }
+
+    // API- GET 
+    public function getAlbumById($albumId)
+    {
+        try {
+            $album = DB::table('ALBUM')->where("AL_ID", "=", $albumId)->get();
+            return $album;
+        } catch (Exception $ex) {
+            return response()->json(['errors' => $ex->getMessage()]);
+        }
+    }
 }

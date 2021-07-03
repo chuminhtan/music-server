@@ -35,10 +35,15 @@ class PlaylistController extends Controller
 
     // Playlist bằng Type
     // Get
-    public function getPlaylistByType($type)
+    public function getPlaylistByType($type, $number)
     {
-        $playlist = DB::table('playlist')->where('PL_TYPE', '=', $type)->get();
+        $playlist = [];
 
+        if ($number == 0) {
+            $playlist = DB::table('playlist')->where('PL_TYPE', '=', $type)->get();
+        } else {
+            $playlist = DB::table('playlist')->where('PL_TYPE', '=', $type)->limit($number)->get();
+        }
         return $playlist;
     }
 

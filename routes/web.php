@@ -46,7 +46,7 @@ Route::group(['prefix' => 'playlist'], function () {
 
     // api
     Route::get('/newest', 'PlaylistController@getNewest');
-    Route::get('/type/{type}', 'PlaylistController@getPlaylistByType');
+    Route::get('/type/{type}/{number}', 'PlaylistController@getPlaylistByType');
 });
 
 
@@ -91,4 +91,8 @@ Route::group(['prefix' => 'album'], function () {
     Route::get('/', 'AlbumController@listAlbumView');
     Route::get('/create', "AlbumController@createAlbumView");
     Route::post('/create', "AlbumController@createAlbum");
+
+    // api
+    Route::get('/song-album/{albumId}', 'AlbumController@getSongAlbumById');
+    Route::get('/{albumId}', 'AlbumController@getAlbumById');
 });
