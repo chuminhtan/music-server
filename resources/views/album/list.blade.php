@@ -5,7 +5,7 @@
 @section('main-container')
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-primary font-weight-bold">Bài Hát</h1>
+    <h1 class="h3 mb-0 text-primary font-weight-bold">Album</h1>
 </div>
 
 <!-- Page Body -->
@@ -15,7 +15,7 @@
         <!-- Content Row -->
         <div class="row mb-4">
             <div class="col-md-2">
-                <a href="{{ url('song/create') }}" class="btn btn-success">Tạo Mới</a>
+                <a href="{{ url('album/create') }}" class="btn btn-success">Tạo Mới</a>
             </div>
         </div>
 
@@ -30,9 +30,8 @@
                             <th>#</th>
                             <th>Mã</th>
                             <th>Ảnh</th>
-                            <th>Tên Bài Hát</th>
-                            <th>Nghệ Sĩ</th>
-                            <th>Thể Loại</th>
+                            <th>Tên Album</th>
+                            <th>Mã Nghệ Sĩ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,25 +39,16 @@
                         $number = 1
                         @endphp
 
-                        @if ( isset($songList) )
-                        @foreach($songList as $song)
+                        @if ( isset($albums) )
+                        @foreach($albums as $album)
                         <tr>
                             <td>{{ $number }}</td>
-                            <td>{{ $song->SO_ID }}</td>
+                            <td>{{ $album->AL_ID }}</td>
                             <td>
-                                <image src={{ "storage/song-image/$song->SO_IMG" }} alt="img" width="80">
+                                <image src={{ "storage/album-image/$album->AL_IMG" }} alt="img" width="80">
                             </td>
-                            <td>{{ $song->SO_NAME }}</td>
-                            <td class="text-right font-weight-bold text-primary">
-
-                                @foreach($song->ARTISTS as $artist)
-                                {{ $artist->AR_NAME . ","}}
-
-                                @endforeach
-                            </td>
-                            <td>
-                                {{ $song->GE_NAME }}
-                            </td>
+                            <td>{{ $album->AL_NAME }}</td>
+                            <td>{{ $album->AR_ID }}</td>
                         </tr>
                         @php
                         $number++;

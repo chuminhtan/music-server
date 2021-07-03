@@ -28,31 +28,6 @@ class UserController extends Controller
     }
 
     // GET
-    // Lấy Playlist đã like
-    public function getLikedPlaylist($userId)
-    {
-        $playlists = DB::table('LIKE_PLAYLIST')
-            ->join('SONG', 'SONG.SO_ID', 'LIKE_PLAYLIST.SO_ID')
-            ->where("LIKE_PLAYLIST.SO_ID", "=", $userId)
-            ->get();
-
-        return $playlists;
-    }
-
-    // GET
-    // Lấy Album đã like
-    public function getLikedAlbum($userId)
-    {
-        $playlists = DB::table('LIKE_ALBUM')
-            ->join('SONG', 'SONG.SO_ID', 'LIKE_ALBUM.SO_ID')
-            ->where("LIKE_ALBUM.US_ID", "=", $userId)
-            ->get();
-
-        return $playlists;
-    }
-
-
-    // GET
     // Lấy Danh Sách Playlist mà USER_ID đã tạo
     public function getPlaylistByUserId($userId)
     {
@@ -244,5 +219,53 @@ class UserController extends Controller
             return response()->json(["result" => "fail", "message" => 'error']);
         }
         return response()->json(["result" => "success", "message" => "Add song to user playlist successfully"]);
+    }
+    
+    // GET
+    // PLAYLIST LIKED
+    public function getPlaylistLiked($user_id)
+    {
+        try {
+
+            // Lấy id playlit mà người dùng đã like
+            $playlistId = DB::table("LIKE_PLAYLIST")->where("US_ID", "=", $user_id)->select('PL_ID')->get();
+            // dd($playlistId);
+
+            // Lấy thông tin chi tiết của từng playlist trong danh sách
+            $playlist = [];
+            $size = sizeof($playlistId);
+            for ($i = 0; $i < $size; $i++) {
+                $playlistTemp = DB::table("PLAYLIST")->where("PL_ID", "=", $playlistId[$i]->PL_ID)->get();
+                array_push($playlist, $playlistTemp[0]);
+            }
+
+            // dd($playlist);
+            return $playlist;
+        } catch (Exception $ex) {
+            return response()->json(["result" => "fail", "message" => "Lỗi Máy Chủ"]);
+        }
+    }
+
+    // GET
+    // ALBUM LIKED
+    public function getAlbumLiked($user_id)
+    {
+        try {
+            // Lấy id album
+            $albumId = DB::table("LIKE_ALBUM")->where("US_ID", "=", $user_id)->select("AL_ID")->get();
+            // dd($albumId);
+
+            // Lấy thông tin chi tiết album
+            $album = [];
+            $size = sizeof($albumId);
+            for ($i = 0; $i < $size; $i++) {
+                $albumTemp = DB::table("ALBUM")->where("AL_ID", "=", $albumId[$i]->AL_ID)->get();
+                array_push($album, $albumTemp[0]);
+            }
+            // dd($album);
+            return $album;
+        } catch (Exception $ex) {
+            return response()->json(["result" => "fail", "message" => "Lỗi Máy Chủ"]);
+        }
     }
 }

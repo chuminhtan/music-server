@@ -4,14 +4,11 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
-use function Psy\debug;
+
 
 class SongController extends Controller
 {
@@ -105,7 +102,6 @@ class SongController extends Controller
                 ]);
         } catch (Exception $ex) {
             Session::flash('fail', 'Lỗi Server');
-            dd($ex->getMessage());
             return Redirect::back();
         }
 
