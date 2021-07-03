@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Redirect;
 class UserController extends Controller
 {
 
@@ -131,7 +133,94 @@ class UserController extends Controller
         // Lưu thời gian đăng nhập vào db
         return response()->json(["result" => "success", "message" => "Đăng Nhập Thành Công", "user" => $user]);
     }
+    
+    // POST
+    // Lưu thông tin lượt thích của người dùng
+    public function like(Request $request){
 
+        // Debug
+        // dd($request->user_id, $request->song_id);
+
+        try {
+            //Kiểm tra người dùng đã like bài hát chưa
+            $users = DB::table('LIKE_SONG')->where('US_ID', '=', $request->user_id)
+                                            ->where("SO_ID", "=", $request->song_id)
+                                            ->get();
+
+            if (count($users) > 0) {
+                DB::table('LIKE_SONG')->where('US_ID', '=', $request->user_id)
+                                    ->where("SO_ID", "=", $request->song_id)
+                                    ->delete();            
+                return response()->json(["result" => "success", "message" => "unlike"]);
+            } 
+
+            // Lưu vào DB
+            DB::table('LIKE_SONG')->insert([
+                'US_ID' => $request->user_id,
+                'SO_ID' => $request->song_id
+            ]);
+        } catch (Exception $ex) {
+            dd($ex->getMessage());
+            return response()->json(["result" => "fail", "message" => "Lỗi Máy Chủ"]);
+        }
+        return response()->json(["result" => "success", "message" => "like"]);
+    }
+
+    // GET
+    // Kiểm tra bài hát đã được like hay chưa
+    public function checkLikeSong($userId, $songId)
+    {
+        //dd($userId, $songId);
+        $like_song = DB::table("LIKE_SONG")->where("US_ID", '=', $userId)
+                                            ->where("SO_ID","=", $songId)
+                                            ->get();
+        return $like_song;
+    }
+
+    // POST
+    // Add New User Playlist
+    public function createNewPlaylist(Request $request){
+        try {
+            // Retrieve img file from public/storage/song-image/<image_name>
+            $imgfile = Storage::path('song-image/' . $request->song_img);
+            //Save img in: public/storage/playlist-image/<image_name>
+            $imagePath = Storage::putFile('playlist-image', new \Illuminate\Http\File($imgfile));
+            $imageName = basename(($imagePath));
+
+            //Add New User Playlist
+            $id = DB::table('PLAYLIST')->insertGetId([
+                'US_ID' => $request->user_playlist_use_id,
+                'PL_NAME' => $request->user_playlist_name,
+                'PL_TYPE' => $request->user_playlist_type,
+                'PL_IMG' => $imageName
+            ]);
+            //Add Song to Playlist
+            DB::table('COLLECTION')->insert([
+                'PL_ID' => $id,
+                'SO_ID' => $request->song_id
+            ]);
+        } catch (Exception $ex) {
+            dd($ex->getMessage());
+            return response()->json(["result" => "fail", "message" => "Error"]);
+        }
+        return response()->json(["result" => "success", "message" => "create new user playlist successfully"]);
+    }
+
+    //POST
+    // Add Song to User Playlist
+    public function addSongToUserPlaylist(Request $request){
+        try {
+            // Add Song to Playlist
+            DB::table('COLLECTION')->insert([
+                'PL_ID' => $request->user_playlist_id,
+                'SO_ID' => $request->user_playlist_song_id
+            ]);
+        } catch (Exception $ex) {
+            return response()->json(["result" => "fail", "message" => 'error']);
+        }
+        return response()->json(["result" => "success", "message" => "Add song to user playlist successfully"]);
+    }
+    
     // GET
     // PLAYLIST LIKED
     public function getPlaylistLiked($user_id)
