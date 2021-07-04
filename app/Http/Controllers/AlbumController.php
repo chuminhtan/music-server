@@ -159,4 +159,16 @@ class AlbumController extends Controller
             return response()->json(['errors' => $ex->getMessage()]);
         }
     }
+
+    // API - GET
+    public function getNewestAlbum()
+    {
+        try {
+            $albums = DB::table('ALBUM')->orderByDesc("AL_ID")->limit(4)->get();
+
+            return $albums;
+        } catch (Exception $ex) {
+            return response()->json(['errors' => $ex->getMessage()]);
+        }
+    }
 }
