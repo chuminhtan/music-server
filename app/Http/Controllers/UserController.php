@@ -269,13 +269,17 @@ class UserController extends Controller
             $size = sizeof($playlistId);
             for ($i = 0; $i < $size; $i++) {
                 $playlistTemp = DB::table("PLAYLIST")->where("PL_ID", "=", $playlistId[$i]->PL_ID)->get();
+
+                if (sizeof($playlistTemp) == 0) {
+                    continue;
+                }
                 array_push($playlist, $playlistTemp[0]);
             }
 
             // dd($playlist);
             return $playlist;
         } catch (Exception $ex) {
-            return response()->json(["result" => "fail", "message" => "Lỗi Máy Chủ"]);
+            return response()->json(["result" => $ex->getMessage()]);
         }
     }
 
@@ -293,6 +297,10 @@ class UserController extends Controller
             $size = sizeof($albumId);
             for ($i = 0; $i < $size; $i++) {
                 $albumTemp = DB::table("ALBUM")->where("AL_ID", "=", $albumId[$i]->AL_ID)->get();
+                // dd($albumTemp);
+                if (sizeof($albumTemp) == 0) {
+                    continue;
+                }
                 array_push($album, $albumTemp[0]);
             }
             // dd($album);
@@ -344,9 +352,9 @@ class UserController extends Controller
                 ->first();
 
             if ($result) {
-                return response()->json(["result" => true]);
+                return response()->json(["result" => "yes"]);
             } else {
-                return response()->json(["result" => false]);
+                return response()->json(["result" => "no"]);
             }
         } catch (Exception $ex) {
             return response()->json(["errors" => $ex->getMessage()]);
@@ -365,9 +373,9 @@ class UserController extends Controller
                 ->first();
 
             if ($result) {
-                return response()->json(["result" => true]);
+                return response()->json(["result" => "yes"]);
             } else {
-                return response()->json(["result" => false]);
+                return response()->json(["result" => "no"]);
             }
         } catch (Exception $ex) {
             return response()->json(["errors" => $ex->getMessage()]);
