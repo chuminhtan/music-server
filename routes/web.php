@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\UserController;
 
 Route::get('/', 'SongController@viewList');
 
@@ -62,21 +63,25 @@ Route::group(['prefix' => 'collection'], function () {
 
 // USER
 Route::group(['prefix' => 'user'], function () {
-
     // api
-    Route::get('/liked-song/{user_id}', 'UserController@getLikedSong'); // Lấy danh sách tất cả bài hát của 1 playlist bằng playlist_id
+    Route::get('/liked-song/{user_id}', 'UserController@getLikedSong'); // Lấy danh sách tất cả bài hát của 1 user
     Route::get('/liked-playlist/{user_id}', 'UserController@getLikedPlaylist'); // Lấy danh sách tất cả bài hát của 1 playlist bằng playlist_id
     Route::get('/playlist/{userId}', 'UserController@getPlaylistByUserId');
     Route::get('/liked/playlist/{user_id}', 'UserController@getPlaylistLiked'); // Lấy danh sách đã like
     Route::get('/liked/album/{user_id}', 'UserController@getAlbumLiked'); // lấy danh sách album đã like
-
     Route::post('/register', 'UserController@register');
     Route::post('/login', 'UserController@login');
     Route::post('/like', 'UserController@like');
     Route::get('/liked_song/{user_id}/{song_id}', 'UserController@checkLikeSong'); // Kiểm tra bài hát đã được thích hay chưa?
     Route::post('/new_userplaylist', 'UserController@createNewPlaylist'); // Add New User Playlist
     Route::post('/addsong_to_userplaylist', 'UserController@addSongToUserPlaylist'); // Add Song to Playlist
+    Route::post('/change-info', 'UserController@changeUserInfo'); // Đổi thông tin user
+    Route::get('/check-playlist-liked/{user_id}/{playlist_id}', 'UserController@checkPlaylistIsLiked');
+    Route::get('/check-album-liked/{user_id}/{album_id}', 'UserController@checkAlbumIsLiked');
+    Route::get('/like-album/{user_id}/{album_id}', 'UserController@likeAlbum');
+    Route::get('/like-playlist/{user_id}/{playlist_id}', 'UserController@likePlaylist');
 });
+
 
 // ARTIST
 Route::group(['prefix' => 'artist'], function () {
@@ -92,6 +97,7 @@ Route::group(['prefix' => 'artist'], function () {
 
 // ALBUM
 Route::group(['prefix' => 'album'], function () {
+    Route::get('/newest', 'AlbumController@getNewestAlbum');
     // view
     Route::get('/', 'AlbumController@listAlbumView');
     Route::get('/create', "AlbumController@createAlbumView");
