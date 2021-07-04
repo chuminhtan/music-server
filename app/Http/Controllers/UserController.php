@@ -301,4 +301,34 @@ class UserController extends Controller
             return response()->json(["result" => "fail", "message" => "Lỗi Máy Chủ"]);
         }
     }
+
+    // API - POST
+    public function changeUserInfo(Request $request)
+    {
+        try {
+            $data = [
+                "id" => $request->user_id,
+                "name" => $request->user_name,
+                "oldPassword" => $request->user_old_password,
+                "newPassword" => $request->user_new_password,
+            ];
+
+            $user = DB::table("USER")->where("US_ID", "=", $data["id"])->first();
+
+            if (!Hash::check($data["oldPassword"], $user->US_PASS)) {
+                return response()->json(["result" => "fail"]);
+            }
+
+            $user = DB::table("USER")
+                ->where("US_ID", "=", $data["id"])
+                ->update([
+                    "US_NAME" => $data["name"],
+                    "US_PASS" => bcrypt($data["newPassword"])
+                ]);
+
+            return response()->json(["result" => "success"]);
+        } catch (Exception $ex) {
+            return response()->json(["errors" => $ex->getMessage()]);
+        }
+    }
 }
