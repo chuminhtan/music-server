@@ -47,6 +47,7 @@ Route::group(['prefix' => 'playlist'], function () {
     // api
     Route::get('/newest', 'PlaylistController@getNewest');
     Route::get('/type/{type}/{number}', 'PlaylistController@getPlaylistByType');
+    Route::get('/similar/{word}', 'PlaylistController@getPlaylistSimilar');
 });
 
 
@@ -86,6 +87,7 @@ Route::group(['prefix' => 'artist'], function () {
 
     // api
     Route::get('/artist-album/{artist_id}', "ArtistController@getAlbumByArtistId");
+    Route::get("/similar/{word}", "ArtistController@getlistArtistSimilar");
 });
 
 // ALBUM

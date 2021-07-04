@@ -95,4 +95,20 @@ class ArtistController extends Controller
             return response()->json(["error" => $ex->getMessage()]);
         }
     }
+    // GET
+    // GET LIST ARTIST SIMILAR
+    public function getlistArtistSimilar(Request $request, $word)
+    {
+        try {
+            $artistList = DB::table("ARTIST")
+                            ->where("AR_NAME",  'LIKE', '%' . $word . '%')
+                            ->get();
+
+            // dd($artistList);
+            return $artistList;
+        } catch (Exception $ex) {
+            return response()->json(["error" => $ex->getMessage()]);
+        }
+    }
+
 }

@@ -145,4 +145,19 @@ class PlaylistController extends Controller
         Session::flash('success', 'Đã Upload');
         return Redirect::to('playlist');
     }
+    // GET
+    // GET PLAYLIST SIMILAR
+    public function getPlaylistSimilar(Request $request, $word)
+    {
+        try {
+            $playlistSimilar = DB::table('playlist')
+                                ->where("PL_NAME", "LIKE", "%" . $word . "%")
+                                ->where("PL_TYPE", "!=", 0)
+                                ->get();
+
+            return $playlistSimilar;
+        } catch (Exception $err) {
+            return response()->json(['errors' => $err->getMessage()]);
+        }
+    }
 }
