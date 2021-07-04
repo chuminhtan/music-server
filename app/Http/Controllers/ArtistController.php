@@ -90,7 +90,7 @@ class ArtistController extends Controller
             // Get Album
             $albums = DB::table("ALBUM")->where("AR_ID", "=", $artistId)->get();
 
-            dd($albums);
+            return $albums;
         } catch (Exception $ex) {
             return response()->json(["error" => $ex->getMessage()]);
         }
