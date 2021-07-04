@@ -331,4 +331,104 @@ class UserController extends Controller
             return response()->json(["errors" => $ex->getMessage()]);
         }
     }
+
+    // API - GET
+    public function checkPlaylistIsLiked($user_id, $playlist_id)
+    {
+
+        try {
+
+            $result = DB::table("LIKE_PLAYLIST")
+                ->where("US_ID", $user_id)
+                ->where("PL_ID", $playlist_id)
+                ->first();
+
+            if ($result) {
+                return response()->json(["result" => true]);
+            } else {
+                return response()->json(["result" => false]);
+            }
+        } catch (Exception $ex) {
+            return response()->json(["errors" => $ex->getMessage()]);
+        }
+    }
+
+    // API - GET
+    public function checkAlbumIsLiked($user_id, $album_id)
+    {
+
+        try {
+
+            $result = DB::table("LIKE_ALBUM")
+                ->where("US_ID", $user_id)
+                ->where("AL_ID", $album_id)
+                ->first();
+
+            if ($result) {
+                return response()->json(["result" => true]);
+            } else {
+                return response()->json(["result" => false]);
+            }
+        } catch (Exception $ex) {
+            return response()->json(["errors" => $ex->getMessage()]);
+        }
+    }
+
+    // API - GET
+    public function likeAlbum($user_id, $album_id)
+    {
+        try {
+
+            $isLiked = DB::table("LIKE_ALBUM")
+                ->where("US_ID", $user_id)
+                ->where("AL_ID", $album_id)
+                ->first();
+
+            if ($isLiked) {
+                DB::table("LIKE_ALBUM")
+                    ->where("US_ID", $user_id)
+                    ->where("AL_ID", $album_id)
+                    ->delete();
+                return response()->json(["result" => "unlike"]);
+            } else {
+                DB::table("LIKE_ALBUM")
+                    ->insert([
+                        "US_ID" => $user_id,
+                        "AL_ID" => $album_id,
+                    ]);
+
+                return response()->json(["result" => "like"]);
+            }
+        } catch (Exception $ex) {
+            return response()->json(["errors" => $ex->getMessage()]);
+        }
+    }
+
+    // API - GET
+    public function likePlaylist($user_id, $playlist_id)
+    {
+        try {
+            $isLiked = DB::table("LIKE_PLAYLIST")
+                ->where("US_ID", $user_id)
+                ->where("PL_ID", $playlist_id)
+                ->first();
+
+            if ($isLiked) {
+                DB::table("LIKE_PLAYLIST")
+                    ->where("US_ID", $user_id)
+                    ->where("PL_ID", $playlist_id)
+                    ->delete();
+                return response()->json(["result" => "unlike"]);
+            } else {
+                DB::table("LIKE_PLAYLIST")
+                    ->insert([
+                        "US_ID" => $user_id,
+                        "PL_ID" => $playlist_id
+                    ]);
+                return response()->json(["result" => "like"]);
+            }
+        } catch (Exception $ex) {
+            return response()->json(["errors" => $ex->getMessage()]);
+        }
+    }
 }
