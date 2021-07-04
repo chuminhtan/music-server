@@ -95,7 +95,7 @@ Route::group(['prefix' => 'artist'], function () {
 
 // ALBUM
 Route::group(['prefix' => 'album'], function () {
-    Route::get('/newest-album', 'AlbumController@getNewestAlbum');
+    Route::get('/newest', 'AlbumController@getNewestAlbum');
     // view
     Route::get('/', 'AlbumController@listAlbumView');
     Route::get('/create', "AlbumController@createAlbumView");
